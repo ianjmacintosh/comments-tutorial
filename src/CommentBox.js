@@ -70,16 +70,25 @@ class CommentBox extends Component {
 }
 
 class Comment extends Component {
+  rawMarkup() {
+    var md = new Remarkable(),
+      rawMarkup = md.render(this.props.children.toString());
+      return { __html: rawMarkup };
+  }
   render() {
-    var md = new Remarkable();
     return (
       <div className="comment">
         <h2 className="commentAuthor">
           {this.props.author}
         </h2>
-        {md.render(this.props.children.toString())}
+        <span dangerouslySetInnerHTML={this.rawMarkup()} />
       </div>
     );
+    /*
+      This "dangerouslySetInnerHTML" business seems odd, and the React documentation says it's a backdoor
+      allowing the author to get around XSS protection. This makes it sounds like React is supplying the
+      <span> component. Huh!
+    */
   }
 }
 
