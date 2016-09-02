@@ -70,12 +70,13 @@ class CommentBox extends Component {
 
 class Comment extends Component {
   render() {
+    var md = new Remarkable(); // Uh oh, I'm going to need to find and include this library!
     return (
       <div className="comment">
         <h2 className="commentAuthor">
           {this.props.author}
         </h2>
-        {this.props.children}
+        {md.render(this.props.children.toString())}
       </div>
     );
   }
