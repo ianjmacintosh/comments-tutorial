@@ -4,7 +4,8 @@ class CommentList extends Component {
   render() {
     return (
       <div className="commentList">
-        Hello world! I am a CommentList.
+        <Comment author="Pete Hunt">This is one comment</Comment>
+        <Comment author="Jordan Walke">This is *another* comment</Comment>
       </div>
       /*
         > The <div> tags are not actual DOM nodes; they are instantiations of React div components.
@@ -31,6 +32,7 @@ class CommentBox extends Component {
   render() {
     return (
       <div className="commentBox">
+        <h1>Comments</h1>
         <CommentList />
         <CommentForm />
       </div>
@@ -62,6 +64,19 @@ class CommentBox extends Component {
         div tag. I don't get the impression React has a <div> tag defined, but what the documentation was
         trying to say is that it isn't an HTML tag until React parses the component tree.
       */
+    );
+  }
+}
+
+class Comment extends Component {
+  render() {
+    return (
+      <div className="comment">
+        <h2 className="commentAuthor">
+          {this.props.author}
+        </h2>
+        {this.props.children}
+      </div>
     );
   }
 }
