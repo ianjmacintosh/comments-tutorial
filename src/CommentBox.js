@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Remarkable from "remarkable";
 
 class CommentList extends Component {
   render() {
@@ -70,7 +71,7 @@ class CommentBox extends Component {
 
 class Comment extends Component {
   render() {
-    var md = new Remarkable(); // Uh oh, I'm going to need to find and include this library!
+    var md = new Remarkable();
     return (
       <div className="comment">
         <h2 className="commentAuthor">
