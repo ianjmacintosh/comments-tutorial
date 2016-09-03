@@ -1,41 +1,6 @@
 import React, { Component } from 'react';
 import Remarkable from "remarkable";
 
-class CommentList extends Component {
-  render() {
-    var commentNodes = this.props.data.map(function(comment) {
-      return (
-        <Comment author={comment.author} key={comment.id}>
-          {comment.text}
-        </Comment>
-        );
-    });
-
-    return (
-      <div className="commentList">
-        {commentNodes}
-      </div>
-      /*
-        > The <div> tags are not actual DOM nodes; they are instantiations of React div components.
-        You can think of these as markers or pieces of data that React knows how to handle.
-        React is safe. We are not generating HTML strings so XSS protection is the default.
-
-        [Source](https://facebook.github.io/react/docs/tutorial.html#whats-going-on)
-      */
-    );
-  }
-}
-
-class CommentForm extends Component {
-  render() {
-    return (
-      <div className="commentForm">
-        Bonjour monde! Je suis un CommentForm!
-      </div>
-    );
-  }
-}
-
 class CommentBox extends Component {
   render() {
     return (
@@ -76,6 +41,31 @@ class CommentBox extends Component {
   }
 }
 
+class CommentList extends Component {
+  render() {
+    var commentNodes = this.props.data.map(function(comment) {
+      return (
+        <Comment author={comment.author} key={comment.id}>
+          {comment.text}
+        </Comment>
+        );
+    });
+
+    return (
+      <div className="commentList">
+        {commentNodes}
+      </div>
+      /*
+        > The <div> tags are not actual DOM nodes; they are instantiations of React div components.
+        You can think of these as markers or pieces of data that React knows how to handle.
+        React is safe. We are not generating HTML strings so XSS protection is the default.
+
+        [Source](https://facebook.github.io/react/docs/tutorial.html#whats-going-on)
+      */
+    );
+  }
+}
+
 class Comment extends Component {
   rawMarkup() {
     var md = new Remarkable(),
@@ -96,6 +86,16 @@ class Comment extends Component {
       allowing the author to get around XSS protection. This makes it sounds like React is supplying the
       <span> component. Huh!
     */
+  }
+}
+
+class CommentForm extends Component {
+  render() {
+    return (
+      <div className="commentForm">
+        Bonjour monde! Je suis un CommentForm!
+      </div>
+    );
   }
 }
 
