@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import Remarkable from "remarkable";
 
-class CommentBox extends Component {
+var CommentBox = React.createClass({
+  getInitialState() {
+    return { "data": [] };
+  },
   render() {
     return (
       <div className="commentBox">
         <h1>Comments</h1>
-        <CommentList data={this.props.data}/>
+        <CommentList data={this.state.data}/>
         <CommentForm />
       </div>
       /*
@@ -39,7 +42,7 @@ class CommentBox extends Component {
       */
     );
   }
-}
+});
 
 class CommentList extends Component {
   render() {
