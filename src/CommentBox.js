@@ -7,6 +7,19 @@ var CommentBox = React.createClass({
   getInitialState() {
     return { "data": [] };
   },
+  componentDidMount: function() {
+    $.ajax({ // I wonder what the benefits and costs of relying on `$` to come from elsewhere are vs `import`ing
+      "url": this.props.url,
+      "dataType": "json",
+      "cache": false,
+      "success": function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      "error": function(xhr, status, err) {
+        window.console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   render() {
     return (
       <div className="commentBox">
