@@ -4,10 +4,7 @@ import React, { Component } from "react";
 import Remarkable from "remarkable";
 
 var CommentBox = React.createClass({
-  getInitialState() {
-    return { "data": [] };
-  },
-  componentDidMount: function() {
+  loadCommentsFromServer() {
     $.ajax({ // I wonder what the benefits and costs of relying on `$` to come from elsewhere are vs `import`ing
       "url": this.props.url,
       "dataType": "json",
@@ -19,6 +16,13 @@ var CommentBox = React.createClass({
         window.console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
+  },
+  getInitialState() {
+    return { "data": [] };
+  },
+  componentDidMount: function() {
+    this.loadCommentsFromServer();
+    setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
   render() {
     return (
